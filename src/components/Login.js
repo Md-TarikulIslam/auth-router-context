@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/UserContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   console.log("create user", signIn);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +20,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log("sign in user", user);
-        form.reset()
+        form.reset();
+        navigate("/");
       })
       .catch((error) => {
         console.error("sign in error", error);
@@ -29,7 +33,7 @@ const Login = () => {
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col ">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login In</h1>
+            <h1 className="text-5xl font-bold">Log In</h1>
             <p className="py-6">Enter your e-mail and password to Log in</p>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -58,9 +62,9 @@ const Login = () => {
                   required
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <Link to="#" className="label-text-alt link link-hover">
                     Forgot password?
-                  </a>
+                  </Link>
                 </label>
               </div>
               <div className="form-control mt-6">
